@@ -21,6 +21,7 @@ public class SpawnManager : MonoBehaviour
         {
             Instantiate(temp, item);
         }
+        Debug.Log("Instance!");
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class SpawnManager : MonoBehaviour
 
         foreach (Transform t in parent)
         {
-
+            Debug.Log(t);
             transforms.Add(t);
 
             GetAllChildren(t, ref transforms);
