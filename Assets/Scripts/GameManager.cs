@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private float hp = Constants.StartHP;
     private float score;
-
+    private float highScore;
     void Awake()
     {
         if (instance == null)
@@ -45,8 +45,12 @@ public class GameManager : MonoBehaviour
 
     private void Die()
     {
+        if (score > highScore)
+            highScore = score;
         InterfaceManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
-        this.GameState = GameState.Dead;
+        InterfaceManager.Instance.ShowButton();
+        ResetScore();
+        GameState = GameState.Dead;
     }
 
     public void Damage(float dmg)
@@ -56,7 +60,6 @@ public class GameManager : MonoBehaviour
         if (hp <= 0)
         {
             Die();
-            Debug.Log("Dead");
             return;
         }
         

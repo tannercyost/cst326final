@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class InterfaceManager : MonoBehaviour
 {
     //public TextMeshPro ScoreText, StatusText;
     public TextMeshProUGUI ScoreText, StatusText, HealthText;
+    public Button PlayAgain;
     void Awake()
     {
         if (instance == null)
@@ -13,6 +17,8 @@ public class InterfaceManager : MonoBehaviour
             instance = this;
             UpdateScoreText(0);
             UpdateHealthText(Constants.StartHP);
+            PlayAgain.onClick.AddListener(ResetScene);
+            PlayAgain.gameObject.SetActive(false);
         }
         else
         {
@@ -48,5 +54,15 @@ public class InterfaceManager : MonoBehaviour
     public void SetStatus(string text)
     {
         StatusText.text = text;
+    }
+
+    public void ShowButton()
+    {
+        PlayAgain.gameObject.SetActive(true);
+    }
+
+    private void ResetScene()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
