@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
+    public int ScorePoints = 100;
+    public float rotateSpeed = 50f;
     void Update()
     {
         transform.Rotate(Vector3.up, Time.deltaTime * rotateSpeed);
@@ -11,10 +13,8 @@ public class Goal : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        InterfaceManager.Instance.IncreaseScore(ScorePoints);
+        GameManager.Instance.IncreaseScore(ScorePoints);
         Destroy(this.gameObject);
     }
 
-    public int ScorePoints = 100;
-    public float rotateSpeed = 50f;
 }

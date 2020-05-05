@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private float hp = Constants.StartHP;
+    private float score;
+
     void Awake()
     {
         if (instance == null)
         {
-
+            instance = this;
         }
-
+        else
+        {
+            DestroyImmediate(this);
+        }
     }
 
     private static GameManager instance;
@@ -22,6 +27,7 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 instance = new GameManager();
+                
             }
             return instance;
         }
@@ -37,10 +43,51 @@ public class GameManager : MonoBehaviour
 
     public bool CanSwipe { get; set; }
 
-    public void Die()
+    private void Die()
     {
         InterfaceManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
         this.GameState = GameState.Dead;
+    }
+
+    public void Damage(float dmg)
+    {
+        hp -= dmg;
+        UpdateHealthText();
+        if (hp <= 0)
+        {
+            Die();
+            Debug.Log("Dead");
+            return;
+        }
+        
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        UpdateScoreText();
+    }
+
+    public void SetScore(float value)
+    {
+        score = value;
+        UpdateScoreText();
+    }
+
+    public void IncreaseScore(float value)
+    {
+        score += value;
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        InterfaceManager.Instance.UpdateScoreText(score);
+    }
+
+    private void UpdateHealthText()
+    {
+        InterfaceManager.Instance.UpdateHealthText(hp);
     }
 }
 

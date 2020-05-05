@@ -6,41 +6,21 @@ public class SpawnManager : MonoBehaviour
 {
     public List<GameObject> rows;
     private List<Transform> childs;
-    public GameObject temp;
+    public GameObject goal;
+    public GameObject obstacle;
     // Start is called before the first frame update
     void Start()
     {
-        childs = new List<Transform>();
-        GetAllChildren(transform, ref childs);
-        //foreach (GameObject item in rows)
-        //{
-        //    Debug.Log(item);
-        //}
-
-        foreach (Transform item in childs)
+        foreach (Transform t in transform)
         {
-            Instantiate(temp, item);
-        }
-        Debug.Log("Instance!");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private static void GetAllChildren(Transform parent, ref List<Transform> transforms)
-    {
-
-        foreach (Transform t in parent)
-        {
-            Debug.Log(t);
-            transforms.Add(t);
-
-            GetAllChildren(t, ref transforms);
+            foreach (Transform item in t)
+            {
+                if (Random.value > 0.90)
+                    Instantiate(goal, item);
+                else if (Random.value > 0.90)
+                    Instantiate(obstacle, item);
+            }
 
         }
-
     }
 }

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider col)
+    public float damage = 1.0f;
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == Constants.PlayerTag)
         {
-            GameManager.Instance.Die();
+            GameManager.Instance.Damage(damage);
+            Debug.Log("Damage");
         }
     }
 }
