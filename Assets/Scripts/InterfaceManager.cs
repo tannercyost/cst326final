@@ -17,8 +17,7 @@ public class InterfaceManager : MonoBehaviour
             instance = this;
             UpdateScoreText(0);
             UpdateHealthText(Constants.StartHP);
-
-            UpdateHighScoreText(PlayerPrefs.GetFloat("highScore"));
+            UpdateHighScoreText();
             PlayAgain.onClick.AddListener(ResetScene);
             PlayAgain.gameObject.SetActive(false);
         }
@@ -28,7 +27,6 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
-    //singleton implementation
     private static InterfaceManager instance;
     public static InterfaceManager Instance
     {
@@ -53,9 +51,9 @@ public class InterfaceManager : MonoBehaviour
         ScoreText.text = Constants.ScoreUI + score.ToString();
     }
 
-    public void UpdateHighScoreText(float highScore)
+    public void UpdateHighScoreText()
     {
-        HighScoreText.text = Constants.HighScoreUI + highScore.ToString();
+        HighScoreText.text = Constants.HighScoreUI + PlayerPrefs.GetFloat("highScore").ToString();
     }
 
     public void SetStatus(string text)

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 100
   rotateSpeed: 50
-  speed: 5
+  gm: {fileID: 0}
 --- !u!114 &-8241834519250438153
 MonoBehaviour:
   m_ObjectHideFlags: 0
