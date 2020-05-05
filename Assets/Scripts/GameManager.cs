@@ -46,8 +46,12 @@ public class GameManager : MonoBehaviour
     private void Die()
     {
         if (score > highScore)
+        {
             highScore = score;
-        InterfaceManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
+            PlayerPrefs.SetFloat("highScore", highScore);
+        }
+        InterfaceManager.Instance.UpdateHighScoreText(highScore);
+        InterfaceManager.Instance.SetStatus(Constants.StatusDead);
         InterfaceManager.Instance.ShowButton();
         ResetScore();
         GameState = GameState.Dead;

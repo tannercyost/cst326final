@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class InterfaceManager : MonoBehaviour
 {
     //public TextMeshPro ScoreText, StatusText;
-    public TextMeshProUGUI ScoreText, StatusText, HealthText;
+    public TextMeshProUGUI ScoreText, StatusText, HealthText, HighScoreText;
     public Button PlayAgain;
     void Awake()
     {
@@ -17,6 +17,8 @@ public class InterfaceManager : MonoBehaviour
             instance = this;
             UpdateScoreText(0);
             UpdateHealthText(Constants.StartHP);
+
+            UpdateHighScoreText(PlayerPrefs.GetFloat("highScore"));
             PlayAgain.onClick.AddListener(ResetScene);
             PlayAgain.gameObject.SetActive(false);
         }
@@ -49,6 +51,11 @@ public class InterfaceManager : MonoBehaviour
     public void UpdateScoreText(float score)
     {
         ScoreText.text = Constants.ScoreUI + score.ToString();
+    }
+
+    public void UpdateHighScoreText(float highScore)
+    {
+        HighScoreText.text = Constants.HighScoreUI + highScore.ToString();
     }
 
     public void SetStatus(string text)
