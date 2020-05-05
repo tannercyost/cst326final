@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class DestroyTimer : MonoBehaviour
 {
-    public float LifeTime = 10f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Invoke("DestroyObject", LifeTime);
-    }
+    private float lifeTime = 2f;
 
     void DestroyObject()
     {
@@ -18,5 +12,11 @@ public class DestroyTimer : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Triggered");
+        if (other.CompareTag("EndCap"))
+            Invoke("DestroyObject", lifeTime);
     }
 }
