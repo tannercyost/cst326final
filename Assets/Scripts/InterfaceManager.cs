@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class InterfaceManager : MonoBehaviour
 {
     //public TextMeshPro ScoreText, StatusText;
-    public TextMeshProUGUI ScoreText, StatusText, HealthText;
+    public TextMeshProUGUI ScoreText, StatusText, HealthText, HighScoreText;
+    public Button PlayAgain;
     void Awake()
     {
         if (instance == null)
@@ -13,6 +17,9 @@ public class InterfaceManager : MonoBehaviour
             instance = this;
             UpdateScoreText(0);
             UpdateHealthText(Constants.StartHP);
+            UpdateHighScoreText();
+            PlayAgain.onClick.AddListener(ResetScene);
+            PlayAgain.gameObject.SetActive(false);
         }
         else
         {
@@ -20,7 +27,6 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
-    //singleton implementation
     private static InterfaceManager instance;
     public static InterfaceManager Instance
     {
@@ -45,8 +51,23 @@ public class InterfaceManager : MonoBehaviour
         ScoreText.text = Constants.ScoreUI + score.ToString();
     }
 
+    public void UpdateHighScoreText()
+    {
+        HighScoreText.text = Constants.HighScoreUI + PlayerPrefs.GetFloat("highScore").ToString();
+    }
+
     public void SetStatus(string text)
     {
         StatusText.text = text;
+    }
+
+    public void ShowButton()
+    {
+        PlayAgain.gameObject.SetActive(true);
+    }
+
+    private void ResetScene()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

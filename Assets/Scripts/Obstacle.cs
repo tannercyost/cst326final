@@ -5,13 +5,19 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public float damage = 1.0f;
-    public float speed;
-    void Update()
+    public GameObject gm;
+    private GameManager gmS;
+
+    private void Awake()
     {
-        //transform.Rotate(Vector3.up, Time.deltaTime * rotateSpeed);
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        gm = GameObject.Find("GameManager");
+        gmS = gm.GetComponent<GameManager>();
     }
-    void OnTriggerEnter(Collider col)
+    private void Update()
+    {
+        transform.Translate(Vector3.left * gmS.globalSpeed * Time.deltaTime);
+    }
+    private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == Constants.PlayerTag)
         {

@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour
 {
     private float hp = Constants.StartHP;
     private float score;
-
+    private float highScore;
+    public float globalSpeed;
     void Awake()
     {
+        highScore = PlayerPrefs.GetFloat("highScore");
         if (instance == null)
         {
             instance = this;
@@ -36,17 +38,22 @@ public class GameManager : MonoBehaviour
     protected GameManager()
     {
         GameState = GameState.Start;
-        CanSwipe = false;
     }
 
     public GameState GameState { get; set; }
 
-    public bool CanSwipe { get; set; }
 
     private void Die()
     {
-        InterfaceManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
-        this.GameState = GameState.Dead;
+        if (score > highScore)
+        {
+            PlayerPrefs.SetFloat("highScore", score);
+        }
+        InterfaceManager.Instance.UpdateHighScoreText();
+        InterfaceManager.Instance.SetStatus(Constants.StatusDead);
+        InterfaceManager.Instance.ShowButton();
+        ResetScore();
+        GameState = GameState.Dead;
     }
 
     public void Damage(float dmg)
@@ -56,7 +63,6 @@ public class GameManager : MonoBehaviour
         if (hp <= 0)
         {
             Die();
-            Debug.Log("Dead");
             return;
         }
         

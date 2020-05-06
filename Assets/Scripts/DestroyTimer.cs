@@ -8,10 +8,7 @@ public class DestroyTimer : MonoBehaviour
 
     void DestroyObject()
     {
-        if (GameManager.Instance.GameState != GameState.Dead)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {
