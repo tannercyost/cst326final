@@ -23,7 +23,6 @@ public class Obstacle : MonoBehaviour
         {
             GameManager.Instance.Damage(damage);
             Destroy(gameObject);
-            Debug.Log("Damage");
         }
     }
 }
