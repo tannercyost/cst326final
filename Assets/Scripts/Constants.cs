@@ -6,9 +6,9 @@
 public static class Constants
 {
     public static readonly string PlayerTag = "Player";
-    public static readonly string StatusDead = "You ran out of HP.";
-    public static readonly string HealthUI = "HP\n";
-    public static readonly string ScoreUI = "Score\n";
-    public static readonly string HighScoreUI = "High Score\n";
+    public static readonly string StatusDead = "You hit too many planets";
+    public static readonly string HealthUI = "HP\n\n";
+    public static readonly string ScoreUI = "Score\n\n";
+    public static readonly string HighScoreUI = "High Score\n\n";
     public static readonly float StartHP = 3.0f;
 }
