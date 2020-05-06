@@ -12,7 +12,6 @@ public class DestroyTimer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered");
         if (other.CompareTag("EndCap"))
             Invoke("DestroyObject", lifeTime);
     }
